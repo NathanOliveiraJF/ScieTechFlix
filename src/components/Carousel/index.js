@@ -1,7 +1,8 @@
 import React from 'react';
-import { VideoCardGroupContainer, VideoCardList, Title, ExtraLink } from './styles';
+import { VideoCardGroupContainer, Title, ExtraLink } from './styles';
 import VideoCard from './components/VideoCard';
 import Slider, { SliderItem } from './components/Slider';
+import { ThemeProvider } from 'styled-components';
 
 function Carousel({
   ignoreFirstVideo,
@@ -11,6 +12,11 @@ function Carousel({
   const categoryColor = category.cor;
   const categoryExtraLink = category.link_extra;
   const videos = category.videos;
+
+  const theme = {
+    main: categoryColor
+  };
+ 
   return (
     <VideoCardGroupContainer>
       {categoryTitle && (
@@ -25,23 +31,25 @@ function Carousel({
           }
         </>
       )}
-      <Slider>
-        {videos.map((video, index) => {
-          if (ignoreFirstVideo && index === 0) {
-            return null;
-          }
+      <ThemeProvider theme={theme} >
+        <Slider>
+          {videos.map((video, index) => {
+            if (ignoreFirstVideo && index === 0) {
+              return null;
+            }
 
-          return (
-            <SliderItem key={video.titulo}>
-              <VideoCard
-                videoTitle={video.titulo}
-                videoURL={video.url}
-                categoryColor={categoryColor}
-              />
-            </SliderItem>
-          );
-        })}
-      </Slider>
+            return (
+              <SliderItem key={video.titulo}>
+                <VideoCard
+                  videoTitle={video.titulo}
+                  videoURL={video.url}
+                  categoryColor={categoryColor}
+                />
+              </SliderItem>
+            );
+          })}
+        </Slider>
+      </ThemeProvider>
     </VideoCardGroupContainer>
   );
 }
