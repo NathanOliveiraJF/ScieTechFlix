@@ -19,8 +19,7 @@ const Container = styled.ul`
       font-size: 30px;
       color: ${props => props.theme.main};
     }
-  }
-  
+  } 
   .slick-prev {
     left: 0;
   }
@@ -37,6 +36,7 @@ export const SliderItem = styled.li`
     height: 197px;
     object-fit: cover;
   }
+   
 `;
 
 
